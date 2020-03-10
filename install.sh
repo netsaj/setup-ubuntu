@@ -12,7 +12,7 @@ apt-get install -y apt-transport-https ca-certificates curl software-properties-
 chmod +x installers/*
 
 # install zsh
-`installers\zsh.sh`
+`installers/zsh.sh`
 
 # golang
 add-apt-repository -y ppa:longsleep/golang-backports

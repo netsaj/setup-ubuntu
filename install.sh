@@ -1,43 +1,40 @@
 #!/bin/bash
-if [ ! `whoami` == root ]; then 
-    echo 'Need sudo'
-    exit
-fi
-
-#
-apt update 
-apt-get install -y git curl wget
-apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-
-chmod +x installers/*
-
-# install zsh
-apt update
-apt install -y zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 
-#install node version manager nvm
-curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh -o install_nvm.sh
-sh -c bash install_nvm.sh
+PASSWORD=$(whiptail --passwordbox "please enter your sudo password" 8 78 --title "Password for sudo install" 3>&1 1>&2 2>&3)
 
-# golang
-add-apt-repository -y ppa:longsleep/golang-backports
-#docker
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -y –
-sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable" 
-# - chrome
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add --yes -
-sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+#prompt for check what install
 
-#cleaning ppa repositories
-`tools/cleanup.sh`
+whiptail --title "Ubuntu setup for developers" --checklist --separate-output \
+"Choose the thecnologies to install.  " 20 78 10 \
+"DOCKER" "Install docker CE  " OFF \
+"KUBERNETES" "Install kubectl and minikube  " OFF \
+"GOLANG" "Install golang last version  " ON \
+"JAVA" "Install Oracle JDK 8  " ON \
+"NODEJS" "install nodeJS support using NVM  " ON 2> results
 
-sudo apt-get update
-apt update
-apt install -y golang-go
-apt-get install -y docker-ce 
-# apt install --yes opera-stable
-apt-get install -y python3 python3-pip python3-venv
-apt-get install google-chrome-stable
-apt install kubectl
+while read choice
+    do
+    case $choice in
+    DOCKER) echo "Installing docker"
+    ;;
+    KUBERNETES)  echo "installing kubernetes"
+    ;;
+    GOLANG) echo $PASSWORD | sudo --stdin ./scripts/golang.sh
+    ;;
+    JAVA) echo $PASSWORD | sudo --stdin ./scripts/java.sh
+    ;;
+    NODEJS)  ./scripts/nodejs.sh && [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh  # This loads NVM
+    ;;
+    *) echo "Finish script"
+    ;;
+    esac
+done < results
+
+function install_golang() {
+    echo $PASSWORD
+}
+
+# read -sp "password for execute sudo commands: " password 
+# echo $password
+# echo $password | sudo -S apt update

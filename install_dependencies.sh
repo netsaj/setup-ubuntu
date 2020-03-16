@@ -6,7 +6,7 @@ PASSWORD=$1
 #prompt for check what install
 
 whiptail --title "Ubuntu setup for developers" --checklist --separate-output \
-"Choose the thecnologies to install.  " 20 78 10 \
+"Choose the thecnologies to install.  " 20 75 10 \
 "BASE" "Install base dependencies (NOT UNCHECK) " OFF \
 "DOCKER" "Install docker CE  " OFF \
 "KUBERNETES" "Install kubectl cli  " OFF \

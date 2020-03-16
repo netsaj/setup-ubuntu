@@ -9,10 +9,10 @@ else
 fi
 
 CHOISE=$(
-    whiptail --title "Setup ubuntu for developers - Tool" --menu "Choose an option" 25 78 16 \
+    whiptail --title "Setup ubuntu for developers - Tool" --menu "Choose an option" 25 75 10 \
     "01)" "Install dependencies, code languages and dev tools." \
-    "02)" "Install databases and admin GUIs" \
-    "03)" "Install IDEs" \
+    "02)" "Install IDEs" \
+    "03)" "Install databases and admin GUIs" \
     "04)" "Install tools" \
     "05)" "Customize and install themes" 3>&2 2>&1 1>&3	
 )
@@ -24,3 +24,5 @@ then
 elif [ "${CHOISE}" = "02)" ]; then
     ./install_ides.sh $PASSWORD
 fi
+source ~/.bashrc
+

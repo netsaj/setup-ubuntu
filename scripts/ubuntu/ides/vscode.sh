@@ -1,9 +1,10 @@
 #!/bin/bash
-REPO_EXIST=$(ls /etc/apt/sources.list.d | grep --count vscode.list)
-if [ $REPO_EXIST -eq 0 ]; then
-    wget -O - https://tagplus5.github.io/vscode-ppa/ubuntu/gpg.key | apt-key add - && \
-    wget -O /etc/apt/sources.list.d/vscode.list https://tagplus5.github.io/vscode-ppa/ubuntu/vscode.list && \
-    apt update
+PASSWORD=$1
+echo $PASSWORD | sudo --stdin apt install snapd
+SNAPD_IN_PATH=$(cat $HOME/.bashrc | grep --count "export PATH=/snap/bin:")
+if [ $SNAPD_IN_PATH -eq "0" ]; then
+    echo "export PATH=/snap/bin:\$PATH" >> ~/.bashrc
 fi
-
-apt install code
+export PATH=/snap/bin:PATH
+echo $PASSWORD | sudo --stdin systemctl start snapd.service
+echo $PASSWORD | sudo --stdin snap install --classic code

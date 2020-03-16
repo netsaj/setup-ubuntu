@@ -7,4 +7,4 @@ if [ $REPO_EXIST -eq 0 ]; then
 fi
 
 
-apt-get install $1
+apt-get install --yes $1

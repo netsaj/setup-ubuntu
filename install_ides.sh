@@ -6,7 +6,7 @@ PASSWORD=$1
 #prompt for check what install
 
 whiptail --title "Ubuntu setup for developers" --checklist --separate-output \
-"Choose the IDEs to install.  " 20 78 10 \
+"Choose the IDEs to install.  " 20 75 10 \
 "01)" "Visual Studio Code  " OFF \
 "02)" "Android Studio  " OFF \
 "03)" "CLion for C and C++  " OFF \
@@ -18,8 +18,7 @@ whiptail --title "Ubuntu setup for developers" --checklist --separate-output \
 "09)" "PyCharm Community, for Python" OFF \
 "10)" "PyCharm Professional, for Python  " OFF \
 "11)" "RubyMine, for Ruby   " OFF \
-"12)" "WebStorm, for HTML5, CSS3. JS/NodeJS" OFF \
-"webstorm" "install CLion support using NVM  " OFF 2> .results
+"12)" "WebStorm, for HTML5, CSS3. JS/NodeJS" OFF  2> .results
 
 while read choice
     do

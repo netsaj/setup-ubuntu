@@ -23,9 +23,9 @@ whiptail --title "Ubuntu setup for developers" --checklist --separate-output \
 while read choice
     do
     case $choice in
-    "01)") echo $PASSWORD | sudo --stdin ./scripts/ubuntu/ides/vscode.sh
+    "01)")  ./scripts/ubuntu/ides/vscode.sh  $PASSWORD
     ;;
-    "02)") echo $PASSWORD | sudo --stdin ./scripts/ubuntu/ides/android.sh
+    "02)")  ./scripts/ubuntu/ides/android.sh $PASSWORD
     ;;
     "03)") echo $PASSWORD | sudo -stdin ./scripts/ubuntu/ides/jetbrains.sh clion
     ;;

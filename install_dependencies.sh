@@ -11,6 +11,7 @@ whiptail --title "Ubuntu setup for developers" --checklist --separate-output \
 "DOCKER" "Install docker CE  " OFF \
 "KUBERNETES" "Install kubectl cli  " OFF \
 "GCLOUD" "Install gcloud SDK  " OFF \
+"AWSCLI" "Install AWS cli v2  " OFF \
 "PROTOTOOL" "Install uber/prototool  for compile proto files  " OFF \
 "GOLANG" "Install golang last version  " OFF \
 "JAVA" "Install Oracle JDK 8  " OFF \
@@ -26,6 +27,8 @@ while read choice
     KUBERNETES)  echo $PASSWORD | sudo --stdin ./scripts/ubuntu/dependencies/kubernetes.sh
     ;;
     GCLOUD)  echo $PASSWORD | sudo --stdin ./scripts/ubuntu/dependencies/gcloud.sh
+    ;;
+    AWSCLI)  echo $PASSWORD | sudo --stdin ./scripts/ubuntu/dependencies/aws.sh
     ;;
     PROTOTOOL)  echo $PASSWORD | sudo --stdin ./scripts/ubuntu/dependencies/prototool.sh
     ;;

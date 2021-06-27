@@ -1,3 +1,4 @@
+rm -f ./aws
 rm -f temp
 mkdir temp
 cd temp/
